@@ -1,25 +1,25 @@
 /**
  * 构建期开关：为真时安装包使用 Preview 身份，而后端环境仍由 `ZCODE_ENV` 单独决定。
  * 典型用法是 `ZCODE_ENV=production ZCODE_PREVIEW_IDENTITY=1`，得到一个连接生产后端、
- * 可与正式版并排安装的 `ZCode Preview`。
+ * 可与正式版并排安装的 `Kai Preview`。
  */
 export const ZCODE_PREVIEW_IDENTITY_ENV = "ZCODE_PREVIEW_IDENTITY";
 
 const PRODUCTION_IDENTITY = Object.freeze({
   flavor: "production",
-  appId: "dev.zcode.app",
-  productName: "ZCode",
-  linuxExecutableName: "zcode",
-  linuxPackageName: "zcode",
+  appId: "dev.kai.app",
+  productName: "Kai",
+  linuxExecutableName: "kai",
+  linuxPackageName: "kai",
   cuaHelperInstallVariant: null,
 });
 
 const PREVIEW_IDENTITY = Object.freeze({
   flavor: "preview",
-  appId: "dev.zcode.app.preview",
-  productName: "ZCode Preview",
-  linuxExecutableName: "zcode-preview",
-  linuxPackageName: "zcode-preview",
+  appId: "dev.kai.app.preview",
+  productName: "Kai Preview",
+  linuxExecutableName: "kai-preview",
+  linuxPackageName: "kai-preview",
   cuaHelperInstallVariant: "preview",
 });
 
@@ -84,7 +84,9 @@ export function resolveDesktopArtifactSuffix(env = process.env) {
  */
 export function resolveWindowsAppUserModelIdForFlavor(flavor, runtime = { isPackaged: true }) {
   if (runtime.isPackaged === false) {
-    return "cn.aminer.zcode";
+    // 自有品牌（Kai）后开发态 AUMID 独立于打包态身份，避免本地调试快捷方式
+    // 与 Kai / Kai Preview 安装包互相污染；原 cn.aminer.zcode 为上游身份，不再沿用。
+    return "dev.kai.app.dev";
   }
   return desktopProductIdentities[flavor === "preview" ? "preview" : "production"].appId;
 }

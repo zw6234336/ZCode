@@ -26,7 +26,7 @@ export function scanZCodeDataDirectoryInWorker(
     };
     const abort = () => {
       void worker.terminate();
-      finish(() => reject(new DOMException("ZCode data size scan aborted", "AbortError")));
+      finish(() => reject(new DOMException("Kai data size scan aborted", "AbortError")));
     };
 
     worker.once("message", (message: unknown) => {

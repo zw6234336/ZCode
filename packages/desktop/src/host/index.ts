@@ -619,7 +619,7 @@ async function dispatchOffPeakRun(request: OffPeakRunDispatchRequest): Promise<{
   const zcodeTaskService = activeServices?.getOptional(IZCodeTaskService);
   const zcodeAgentService = activeServices?.getOptional(IZCodeAgentService);
   if (!zcodeTaskService || !zcodeAgentService) {
-    throw new Error("ZCode task service is not initialized.");
+    throw new Error("Kai task service is not initialized.");
   }
   const runtime = await ensureOffPeakRuntime();
   if (!runtime) {
@@ -999,7 +999,7 @@ async function dispatchCronRun(request: CronRunDispatchRequest): Promise<{
   const targetServices = resolveAutomationTargetServices(request);
   const zcodeTaskService = targetServices.getOptional(IZCodeTaskService);
   if (!zcodeTaskService) {
-    throw new Error("ZCode task service is not initialized.");
+    throw new Error("Kai task service is not initialized.");
   }
   const modelSelectionService = targetServices.getOptional(IModelSelectionService);
   if (!modelSelectionService) {
@@ -3205,7 +3205,7 @@ parentPort.on("message", async (e: Electron.MessageEvent) => {
       parentPort.postMessage({
         type: HostResponseTypes.SessionMessageDeliverResult,
         result: {
-          error: "ZCode task service is not initialized.",
+          error: "Kai task service is not initialized.",
           messageId: msg.request.messageId,
           requestId: msg.request.requestId,
           sessionId: msg.request.fromSessionId,

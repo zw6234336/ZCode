@@ -563,10 +563,12 @@ export default {
   extraMetadata: {
     version: buildMetadata.appVersion,
     zcodeProductFlavor: desktopProductIdentity.flavor,
-    homepage: "https://zcode.z.ai",
+    // 自有品牌（Kai）后的打包元数据占位：deb 的 fpm 只校验 homepage/author.email 非空，
+    // 正式对外分发前替换为实际域名与联系邮箱。
+    homepage: "https://kai.local",
     author: {
-      name: "ZCode",
-      email: "dev@zcode.z.ai",
+      name: "Kai",
+      email: "dev@kai.local",
     },
   },
   // macOS 签名阶段会对 Electron Framework 下每个语言包逐个 codesign。
